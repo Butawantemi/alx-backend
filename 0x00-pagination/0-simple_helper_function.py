@@ -3,12 +3,10 @@
 from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Returns a start and end indexes of a list"""
-    # Compute the start index of the list
-    start_index = (page - 1) * page_size
-
-    # Compute the end index of the list
-    end_index = start_index + page_size
-
-    return (start_index, end_index)
+def index_range(page: int, page_size: int) -> tuple:
+    """
+    return a tuple of size two containing a start idx and an end idx
+    """
+    start_idx = (page - 1) * page_size
+    end_idx = start_idx + page_size
+    return start_idx, end_idx
