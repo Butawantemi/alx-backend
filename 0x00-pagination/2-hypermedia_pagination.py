@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Hypermedia pagination """
+""" hypermedia pagination """
 
 
 import csv
@@ -9,7 +9,7 @@ from typing import List
 
 def index_range(page: int, page_size: int) -> tuple:
     """
-    return a tuple of size two containing a start idx & an end idx
+    Return a tuple of size two containing a start idx and an end idx
     """
     start_idx = (page - 1) * page_size
     end_idx = start_idx + page_size
@@ -17,7 +17,8 @@ def index_range(page: int, page_size: int) -> tuple:
 
 
 class Server:
-    """Server class to paginate a database of popular baby names.
+    """
+    server class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -25,7 +26,7 @@ class Server:
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
+        """cached dataset
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
@@ -37,7 +38,7 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Return page of the dataset
+        return page of the dataset
         """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
@@ -52,7 +53,7 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """
-        Return a dictionary with hypermedia info
+        return a dictionary with hypermedia info
         """
         data = self.get_page(page, page_size)
         start_idx, end_idx = index_range(page, page_size)
