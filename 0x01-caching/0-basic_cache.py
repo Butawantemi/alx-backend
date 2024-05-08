@@ -1,31 +1,39 @@
 #!/usr/bin/env python3
-"""A module to implement basic caching"""
-BaseCaching = __import__("base_caching").BaseCaching
+"""A module that implements a simple LIFO caching algorithm"""
+from collections import OrderedDict
+
+try:
+    BaseCaching = __import__("base_caching").BaseCaching
+except ImportError as e:
+    raise e(e.message)
 
 
-class BasicCache(BaseCaching):
-    """Implements BasicCache class"""
+class LIFOCache(BaseCaching):
+    """LIFO cache class that implements the LIFO cache algorithm"""
 
     def __init__(self):
-        """Initilizes the Basiccache class"""
+        """Instantiates instances of LIFOCache class"""
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """Adds an item to the cache"""
 
-        # check if the key or item is None
+        # Check if key or item is None
         if key is None or item is None:
             return None
 
-        # add item to the cache_data dictionary
+        # Check if the cache is full, MAX_ITEMS reached
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+            # Remove the last in cache key-value pair from the cache
+            removed_key, removed_value = self.cache_data.popitem(True)
+            print("DISCARD: {}".format(removed_key))
+
+        # Add the new item to the cache
         self.cache_data[key] = item
 
     def get(self, key):
-        """Get an item with a specified key"""
+        """Get an item from the cache"""
 
-        # check if key is None or doesn't exist in the cache
-        if key is None:
-            return None
-
-        # return the item or None if key doesn't exist
+        # Return the value if key exists, else None
         return self.cache_data.get(key, None)
