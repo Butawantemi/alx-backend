@@ -7,7 +7,7 @@ from flask import render_template
 
 
 class Config:
-    """A configuration class"""
+    """A configuration class Config"""
 
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -22,13 +22,13 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    """Gets the best match locale"""
+    """gets the best match locale"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 @app.route("/")
 def index():
-    """returns the index page"""
+    """returns the html index page"""
     return render_template("3-index.html")
 
 

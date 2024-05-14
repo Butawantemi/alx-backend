@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A Flask application"""
+"""A flask application"""
 from flask import Flask
 from flask_babel import Babel
 from flask import render_template
@@ -11,7 +11,7 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-# Set configuration from Config class
+# set config from class Config
 class Config:
     """A configuration class"""
 
@@ -20,13 +20,13 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-# Set the configuration from Config class
+# set the config from class Config
 app.config.from_object(Config)
 
 
 @app.route("/")
 def index():
-    """returns the index page"""
+    """return the html index page"""
     return render_template("1-index.html")
 
 
